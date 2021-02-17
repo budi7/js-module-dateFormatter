@@ -1,8 +1,27 @@
-export function toString (value) {
+export function toString (value, ymd, his) {
   if (!value) { return '' }
   const dd = value.getDate()
   const mm = value.getMonth() + 1
   const yyyy = value.getFullYear()
+  if (ymd) {
+    if (his) {
+      const hh = value.getHours()
+      const ii = value.getMinutes()
+      const ss = value.getSeconds()
+
+      return yyyy + '-' + mm + '-' + dd + ' ' + hh + ':' + ii + ':' + ss
+    } else {
+      return yyyy + '-' + mm + '-' + dd
+    }
+  }
+
+  if (his) {
+    const hh = value.getHours()
+    const ii = value.getMinutes()
+    const ss = value.getSeconds()
+
+    return yyyy + '-' + mm + '-' + dd + ' ' + hh + ':' + ii + ':' + ss
+  }
   return dd + '/' + mm + '/' + yyyy
 }
 export function fromYMD (value, separator, translateMonth) {
@@ -17,7 +36,8 @@ export function fromYMD (value, separator, translateMonth) {
 
   const tmp = value.split('-')
   const yyyy = tmp[0]
-  const mm = translateMonth ? getMonthName(parseInt(tmp[1] - 1)) : parseInt(tmp[1] - 1)
+  // const mm = translateMonth ? getMonthName(parseInt(tmp[1] - 1)) : parseInt(tmp[1] - 1)
+  const mm = translateMonth ? getMonthName(parseInt(tmp[1] - 1)) : parseInt(tmp[1])
   const dd = tmp[2]
   // const mm = translateMonth ? getMonthName(parseInt(tmp.getMonth())) : parseInt(tmp.getMonth())
   // const yyyy = tmp.getFullYear()
