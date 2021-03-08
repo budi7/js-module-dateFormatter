@@ -54,7 +54,7 @@ export function fromYMDHis (value, separator, translateMonth) {
 
   const tmp = value.split('-')
   const yyyy = tmp[0]
-  const mm = translateMonth ? getMonthName(parseInt(tmp[1] - 1)) : parseInt(tmp[1] - 1)
+  const mm = translateMonth ? getMonthName(parseInt(tmp[1] - 1)) : tmp[1]
   const day = tmp[2].split(' ')
   const dd = day[0]
 
