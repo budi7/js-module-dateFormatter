@@ -33,12 +33,12 @@ export function fromYMD (value, separator, translateMonth) {
   // const dd = tmp.getDate()
   // const mm = translateMonth ? getMonthName(parseInt(tmp.getMonth())) : parseInt(tmp.getMonth())
   // const yyyy = tmp.getFullYear()
-
   const tmp = value.split('-')
   const yyyy = tmp[0]
   // const mm = translateMonth ? getMonthName(parseInt(tmp[1] - 1)) : parseInt(tmp[1] - 1)
   const mm = translateMonth ? getMonthName(parseInt(tmp[1] - 1)) : parseInt(tmp[1])
-  const dd = tmp[2]
+  const day = tmp[2].split(' ')
+  const dd = day[0]
   // const mm = translateMonth ? getMonthName(parseInt(tmp.getMonth())) : parseInt(tmp.getMonth())
   // const yyyy = tmp.getFullYear()
 
@@ -54,7 +54,7 @@ export function fromYMDHis (value, separator, translateMonth) {
 
   const tmp = value.split('-')
   const yyyy = tmp[0]
-  const mm = translateMonth ? getMonthName(parseInt(tmp[1] - 1)) : tmp[1]
+  const mm = translateMonth ? getMonthName(parseInt(tmp[1] - 1)) : parseInt(tmp[1] - 1)
   const day = tmp[2].split(' ')
   const dd = day[0]
 
@@ -62,7 +62,7 @@ export function fromYMDHis (value, separator, translateMonth) {
   const hh = time[0]
   const ii = time[1]
 
-  return dd + separator + mm + separator + yyyy + ', pukul ' + hh + ':' + ii
+  return dd + separator + mm + separator + yyyy + ', ' + hh + ':' + ii
 }
 export function getMonthName (value) {
   if (!value && value !== 0) { return '' }
@@ -119,4 +119,12 @@ export function getDateBetween (start, end) {
   }
 
   return getDates(start, end)
+}
+
+export function isGreaterDateFromNow (value) {
+  const dateNow = new Date()
+  const dateLock = new Date(value)
+  const dateDiff = dateLock.getTime() - dateNow.getTime()
+
+  return dateDiff > 0
 }
